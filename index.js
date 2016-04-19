@@ -77,6 +77,8 @@ var AvatarEditor = React.createClass({
         height: React.PropTypes.number,
         color: React.PropTypes.arrayOf(React.PropTypes.number),
         style: React.PropTypes.object,
+        initialX: React.PropTypes.number,
+        initialY: React.PropTypes.number,
 
         onDropFile: React.PropTypes.func,
         onLoadFailure: React.PropTypes.func,
@@ -94,6 +96,8 @@ var AvatarEditor = React.createClass({
             height: 200,
             color: [0, 0, 0, 0.5],
             style: {},
+            initialX: 0,
+            initialY: 0,
             onDropFile() {},
             onLoadFailure() {},
             onLoadSuccess() {},
@@ -208,8 +212,8 @@ var AvatarEditor = React.createClass({
     handleImageReady(image) {
         var imageState = this.getInitialSize(image.width, image.height);
         imageState.resource = image;
-        imageState.x = 0;
-        imageState.y = 0;
+        imageState.x = this.props.initialX;
+        imageState.y = this.props.initialY;
         this.props.onLoadSuccess(imageState);
         this.setState({drag: false, image: imageState}, this.props.onImageReady);
     },
